@@ -56,6 +56,18 @@ set_gps_params <- function(file,
 }
 
 
+#' Set map matching parameters
+#'
+#' @param candidates Number of candidates.
+#' @param radius Search radius.
+#' @param error GPS sensor error.
+#' @param factor Scale factor to limit shortest path search. Only applicable for stmatch.
+#' @param vmax Maximum vehicle speed. Only applicable for stmatch.
+#'
+#' @return
+#' @export
+#'
+#' @examples
 set_map_match_params <- function(candidates = 8,
                                  radius = 300,
                                  error = 50,
