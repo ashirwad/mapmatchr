@@ -18,4 +18,16 @@
   <url>
     <loc>https://ashirwad.github.io/mapmatchr/reference/index.html</loc>
   </url>
+  <url>
+    <loc>https://ashirwad.github.io/mapmatchr/reference/set_gps_params.html</loc>
+  </url>
+  <url>
+    <loc>https://ashirwad.github.io/mapmatchr/reference/set_map_match_params.html</loc>
+  </url>
+  <url>
+    <loc>https://ashirwad.github.io/mapmatchr/reference/set_network_params.html</loc>
+  </url>
+  <url>
+    <loc>https://ashirwad.github.io/mapmatchr/reference/set_output_params.html</loc>
+  </url>
 </urlset>
