@@ -80,3 +80,17 @@ set_map_match_params <- function(candidates = 8,
   checkmate::assert_number(factor)
   checkmate::assert_number(vmax)
 }
+
+
+set_output_params <- function(file, fields = "opath") {
+  # Error handling
+  checkmate::assert_string(file)
+  checkmate::assert_subset(
+    c(
+      "opath", "cpath", "tpath",
+      "ogeom", "mgeom", "pgeom",
+      "offset", "error", "spdist",
+      "tp", "ep", "all"
+    )
+  )
+}
