@@ -86,6 +86,7 @@ set_output_params <- function(file, fields = "opath") {
   # Error handling
   checkmate::assert_string(file)
   checkmate::assert_subset(
+    fields,
     c(
       "opath", "cpath", "tpath",
       "ogeom", "mgeom", "pgeom",
