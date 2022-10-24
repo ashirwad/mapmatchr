@@ -1,3 +1,15 @@
+#' Set network parameters
+#'
+#' @param file Network file name.
+#' @param id Network id column name.
+#' @param source Network source column name.
+#' @param target Network target column name.
+#' @param mode Network mode name. Only applicable to OpenStreetMap (OSM) network.
+#'
+#' @return A list.
+#' @export
+#'
+#' @examples
 set_network_params <- function(file,
                                id = "id",
                                source = "source",
