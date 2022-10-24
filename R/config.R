@@ -82,6 +82,15 @@ set_map_match_params <- function(candidates = 8,
 }
 
 
+#' Set output parameters
+#'
+#' @param file Output file name.
+#' @param fields Output fields name.
+#'
+#' @return A list.
+#' @export
+#'
+#' @examples
 set_output_params <- function(file, fields = "opath") {
   # Error handling
   checkmate::assert_string(file)
