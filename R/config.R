@@ -1,3 +1,17 @@
+set_network_params <- function(file,
+                               id = "id",
+                               source = "source",
+                               target = "target",
+                               mode = "drive") {
+  # Error handling
+  checkmate::assert_string(file)
+  checkmate::assert_string(id)
+  checkmate::assert_string(source)
+  checkmate::assert_string(target)
+  checkmate::assert_string(mode)
+}
+
+
 #' Set GPS parameters
 #'
 #' @param file GPS file name.
