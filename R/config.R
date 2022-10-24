@@ -54,3 +54,17 @@ set_gps_params <- function(file,
   checkmate::assert_string(y)
   checkmate::assert_string(timestamp)
 }
+
+
+set_map_match_params <- function(candidates = 8,
+                                 radius = 300,
+                                 error = 50,
+                                 factor = 1.5,
+                                 vmax = 30) {
+  # Error handling
+  checkmate::assert_int(candidates)
+  checkmate::assert_number(radius)
+  checkmate::assert_number(error)
+  checkmate::assert_number(factor)
+  checkmate::assert_number(vmax)
+}
