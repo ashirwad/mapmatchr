@@ -1,3 +1,48 @@
+#' Define base configuration for precomputing an UBODT table
+#'
+#' @param output Output file name.
+#' @param delta Upper distance of routing (default: 3000, unit: map unit).
+#' @param log_level Log level (default: 2 (infor)), 0-trace, 1-debug, 2-info,
+#' 3-warn, 4-err, 5-critical, 6-off.
+#' @param use_omp If specified, run in multiple threads, which will be faster.
+#'
+#' @return A configuration object.
+#' @export
+#'
+#' @examples
+ubodt_config <- function(output,
+                         delta = 3000,
+                         log_level = 2L,
+                         use_omp = FALSE) {
+  # error handling
+  checkmate::assert_path_for_output(output, overwrite = TRUE, extension = "txt")
+  checkmate::assert_number(delta, lower = 0)
+  checkmate::assert_choice(log_level, choices = 0L:6L)
+  checkmate::assert_flag(use_omp)
+
+  # initialize a config object
+  config <- list(config = NULL)
+
+  # update the config object
+  config <- empty_config |>
+    purrr::assign_in(
+      list(1, "output"),
+      list(file = output)
+    ) |>
+    purrr::assign_in(
+      list(1, "parameters"),
+      list(delta = delta)
+    ) |>
+    purrr::assign_in(
+      list(1, "other"),
+      list(log_level = log_level, use_omp = use_omp)
+    )
+
+  # return the updated config object
+  config
+}
+
+
 #' Set network parameters
 #'
 #' @param file Network file name.
