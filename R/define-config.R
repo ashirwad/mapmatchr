@@ -10,10 +10,10 @@
 #' @export
 #'
 #' @examples
-ubodt_config <- function(output,
-                         delta = 3000,
-                         log_level = 2L,
-                         use_omp = FALSE) {
+ubodt_base_config <- function(output,
+                              delta = 3000,
+                              log_level = 2L,
+                              use_omp = FALSE) {
   # error handling
   checkmate::assert_path_for_output(output, overwrite = TRUE, extension = "txt")
   checkmate::assert_number(delta, lower = 0)
@@ -24,7 +24,7 @@ ubodt_config <- function(output,
   config <- list(config = NULL)
 
   # update the config object
-  config <- empty_config |>
+  config <- config |>
     purrr::assign_in(
       list(1, "output"),
       list(file = output)
@@ -35,8 +35,13 @@ ubodt_config <- function(output,
     ) |>
     purrr::assign_in(
       list(1, "other"),
-      list(log_level = log_level, use_omp = use_omp)
+      list(log_level = log_level)
     )
+
+  if (use_omp) {
+    config <- config |>
+      purrr::assign_in(list(1, "other"), list(use_omp = NULL))
+  }
 
   # return the updated config object
   config
