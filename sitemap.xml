@@ -16,6 +16,9 @@
     <loc>https://ashirwad.github.io/mapmatchr/index.html</loc>
   </url>
   <url>
+    <loc>https://ashirwad.github.io/mapmatchr/reference/fmm_base_config.html</loc>
+  </url>
+  <url>
     <loc>https://ashirwad.github.io/mapmatchr/reference/index.html</loc>
   </url>
   <url>
@@ -28,6 +31,9 @@
     <loc>https://ashirwad.github.io/mapmatchr/reference/set_network_params.html</loc>
   </url>
   <url>
-    <loc>https://ashirwad.github.io/mapmatchr/reference/set_output_params.html</loc>
+    <loc>https://ashirwad.github.io/mapmatchr/reference/stmatch_base_config.html</loc>
+  </url>
+  <url>
+    <loc>https://ashirwad.github.io/mapmatchr/reference/ubodt_base_config.html</loc>
   </url>
 </urlset>
