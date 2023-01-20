@@ -40,7 +40,7 @@ ubodt_base_config <- function(output,
 
   if (use_omp) {
     config <- config |>
-      purrr::assign_in(list(1, "other"), list(use_omp = NULL))
+      purrr::assign_in(list(1, "other", "use_omp"), NULL)
   }
 
   # return the updated config object
@@ -172,7 +172,7 @@ stmatch_base_config <- function(output,
 
   if (use_omp) {
     config <- config |>
-      purrr::assign_in(list(1, "other"), list(use_omp = NULL))
+      purrr::assign_in(list(1, "other", "use_omp"), NULL)
   }
 
   # return the updated config object
