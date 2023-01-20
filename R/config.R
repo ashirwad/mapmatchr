@@ -58,6 +58,45 @@ ubodt_config <- function(output,
 #' @export
 #'
 #' @examples
+fmm_base_config <- function(ubodt,
+                            output,
+                            output_fields = "all",
+                            log_level = 2L,
+                            use_omp = FALSE,
+                            step = 100L) {
+  # defenses
+  checkmate::assert_file_exists(ubodt, extension = "txt")
+
+  # create config object
+  config <- .map_match_config(output, output_fields, log_level, use_omp, step)
+
+  # update the config object
+  config <- config |>
+    purrr::assign_in(
+      list(1, "input", "ubodt"),
+      list(file = ubodt)
+    )
+
+  # return the updated config object
+  config
+}
+
+
+#' Define base configuration for using the FMM map matching algorithm
+#'
+#' @param ubodt Ubodt file name.
+#' @param output Output file name.
+#' @param output_fields Output fields name, one or more in (opath, cpath, tpath,
+#' ogeom, mgeom, pgeom, offset, error, spdist, tp, ep, all).
+#' @param log_level Log level (default: 2 (infor)), 0-trace, 1-debug, 2-info,
+#' 3-warn, 4-err, 5-critical, 6-off.
+#' @param use_omp If specified, run map matching in multiple threads.
+#' @param step Number of trajectories to report the progress of map matching.
+#'
+#' @return A configuration object.
+#' @export
+#'
+#' @examples
 fmm_config <- function(ubodt,
                        output,
                        output_fields = "all",
