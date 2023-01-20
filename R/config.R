@@ -258,26 +258,3 @@ set_map_match_params <- function(candidates = 8,
   checkmate::assert_number(vmax)
 }
 
-
-#' Set output parameters
-#'
-#' @param file Output file name.
-#' @param fields Output fields name.
-#'
-#' @return A list.
-#' @export
-#'
-#' @examples
-set_output_params <- function(file, fields = "opath") {
-  # Error handling
-  checkmate::assert_string(file)
-  checkmate::assert_subset(
-    fields,
-    c(
-      "opath", "cpath", "tpath",
-      "ogeom", "mgeom", "pgeom",
-      "offset", "error", "spdist",
-      "tp", "ep", "all"
-    )
-  )
-}
