@@ -134,8 +134,8 @@ stmatch_base_config <- function(output,
   # defenses
   checkmate::assert_path_for_output(output, overwrite = TRUE, extension = "txt")
   checkmate::assert(
-    checkmate::assert_choice(output_fields, choices = "all"),
-    checkmate::assert_subset(
+    checkmate::check_choice(output_fields, choices = "all"),
+    checkmate::check_subset(
       output_fields,
       choices = c(
         "opath", "cpath", "tpath", "ogeom", "mgeom", "pgeom",
@@ -146,7 +146,7 @@ stmatch_base_config <- function(output,
   )
   checkmate::assert_choice(log_level, choices = 0L:6L)
   checkmate::assert_flag(use_omp)
-  checmate::assert_count(step, positive = TRUE)
+  checkmate::assert_count(step, positive = TRUE)
 
   # initialize a config object
   config <- list(config = NULL)
