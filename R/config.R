@@ -68,7 +68,9 @@ fmm_base_config <- function(ubodt,
   checkmate::assert_file_exists(ubodt, extension = "txt")
 
   # create config object
-  config <- .map_match_config(output, output_fields, log_level, use_omp, step)
+  config <- .create_map_match_config(
+    output, output_fields, log_level, use_omp, step
+  )
 
   # update the config object
   config <- config |>
@@ -102,15 +104,18 @@ stmatch_base_config <- function(output,
                                 use_omp = FALSE,
                                 step = 100L) {
   # create config object
-  config <- .map_match_config(output, output_fields, log_level, use_omp, step)
+  config <- .create_map_match_config(
+    output, output_fields, log_level, use_omp, step
+  )
 
   # return the config object
   config
 }
 
-#' Define base configuration for using the FMM map matching algorithm
+
+#' Define helper function to create base configuration for using the
+#' map matching algorithms
 #'
-#' @param ubodt Ubodt file name.
 #' @param output Output file name.
 #' @param output_fields Output fields name, one or more in (opath, cpath, tpath,
 #' ogeom, mgeom, pgeom, offset, error, spdist, tp, ep, all).
@@ -120,17 +125,13 @@ stmatch_base_config <- function(output,
 #' @param step Number of trajectories to report the progress of map matching.
 #'
 #' @return A configuration object.
-#' @export
-#'
-#' @examples
-fmm_config <- function(ubodt,
-                       output,
-                       output_fields = "all",
-                       log_level = 2L,
-                       use_omp = FALSE,
-                       step = 100L) {
+#' @noRd
+.create_map_match_config <- function(output,
+                                     output_fields = "all",
+                                     log_level = 2L,
+                                     use_omp = FALSE,
+                                     step = 100L) {
   # defenses
-  checkmate::assert_file_exists(ubodt, extension = "txt")
   checkmate::assert_path_for_output(output, overwrite = TRUE, extension = "txt")
   checkmate::assert(
     checkmate::assert_choice(output_fields, choices = "all"),
@@ -153,14 +154,10 @@ fmm_config <- function(ubodt,
   # update the config object
   config <- config |>
     purrr::assign_in(
-      list(1, "input", "ubodt"),
-      list(file = ubodt)
-    ) |>
-    purrr::assign_in(
       list(1, "output"),
       list(
         file = output,
-        fields = purrr::map(purrr::set_names(output_fields), ~ NULL)
+        fields = purrr::map(purrr::set_names(output_fields), ~NULL)
       )
     ) |>
     purrr::assign_in(
