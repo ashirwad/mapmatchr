@@ -82,6 +82,32 @@ fmm_base_config <- function(ubodt,
 }
 
 
+#' Define base configuration for using the STMatch map matching algorithm
+#'
+#' @param output Output file name.
+#' @param output_fields Output fields name, one or more in (opath, cpath, tpath,
+#' ogeom, mgeom, pgeom, offset, error, spdist, tp, ep, all).
+#' @param log_level Log level (default: 2 (infor)), 0-trace, 1-debug, 2-info,
+#' 3-warn, 4-err, 5-critical, 6-off.
+#' @param use_omp If specified, run map matching in multiple threads.
+#' @param step Number of trajectories to report the progress of map matching.
+#'
+#' @return A configuration object.
+#' @export
+#'
+#' @examples
+stmatch_base_config <- function(output,
+                                output_fields = "all",
+                                log_level = 2L,
+                                use_omp = FALSE,
+                                step = 100L) {
+  # create config object
+  config <- .map_match_config(output, output_fields, log_level, use_omp, step)
+
+  # return the config object
+  config
+}
+
 #' Define base configuration for using the FMM map matching algorithm
 #'
 #' @param ubodt Ubodt file name.
