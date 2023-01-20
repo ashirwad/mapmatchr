@@ -81,6 +81,35 @@ fmm_config <- function(ubodt,
   checkmate::assert_choice(log_level, choices = 0L:6L)
   checkmate::assert_flag(use_omp)
   checmate::assert_count(step, positive = TRUE)
+
+  # initialize a config object
+  config <- list(config = NULL)
+
+  # update the config object
+  config <- config |>
+    purrr::assign_in(
+      list(1, "input", "ubodt"),
+      list(file = ubodt)
+    ) |>
+    purrr::assign_in(
+      list(1, "output"),
+      list(
+        file = output,
+        fields = purrr::map(purrr::set_names(output_fields), ~ NULL)
+      )
+    ) |>
+    purrr::assign_in(
+      list(1, "other"),
+      list(log_level = log_level, step = step)
+    )
+
+  if (use_omp) {
+    config <- config |>
+      purrr::assign_in(list(1, "other"), list(use_omp = NULL))
+  }
+
+  # return the updated config object
+  config
 }
 
 
