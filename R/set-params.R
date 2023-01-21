@@ -4,23 +4,36 @@
 #' @param id Network id column name.
 #' @param source Network source column name.
 #' @param target Network target column name.
-#' @param mode Network mode name. Only applicable to OpenStreetMap (OSM) network.
+#' @param mode Network mode name. Only applies to OpenStreetMap (OSM) network.
+#' Allowed values are one of drive|walk|bike|all.
 #'
 #' @return A list.
 #' @export
 #'
 #' @examples
-set_network_params <- function(file,
+set_network_params <- function(config,
+                               file,
                                id = "id",
                                source = "source",
                                target = "target",
                                mode = "drive") {
-  # Error handling
-  checkmate::assert_string(file)
+  # defenses
+  checkmate::assert_list(config)
+  checkmate::assert_file_exists(file, extension = "shp")
   checkmate::assert_string(id)
   checkmate::assert_string(source)
   checkmate::assert_string(target)
-  checkmate::assert_string(mode)
+  checkmate::assert_choice(mode, choices = c("drive", "bike", "walk", "all"))
+
+  # update config object
+  config <- config |>
+    purrr::assign_in(
+      list(1, "input", "network"),
+      list(file = file, id = id, source = source, target = target, mode = mode)
+    )
+
+  # return the updated config object
+  config
 }
 
 
