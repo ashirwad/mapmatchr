@@ -5,7 +5,8 @@
 \title{Set map matching parameters}
 \usage{
 set_map_match_params(
-  candidates = 8,
+  config,
+  candidates = 8L,
   radius = 300,
   error = 50,
   factor = 1.5,
@@ -13,15 +14,22 @@ set_map_match_params(
 )
 }
 \arguments{
+\item{config}{A configuration object.}
+
 \item{candidates}{Number of candidates.}
 
-\item{radius}{Search radius.}
+\item{radius}{Search radius (unit: map unit).}
 
-\item{error}{GPS sensor error.}
+\item{error}{GPS sensor error (unit: map unit).}
 
-\item{factor}{Scale factor to limit shortest path search. Only applicable for stmatch.}
+\item{factor}{Scale factor to limit shortest path search. Only applicable for
+stmatch.}
 
-\item{vmax}{Maximum vehicle speed. Only applicable for stmatch.}
+\item{vmax}{Maximum vehicle speed (unit: map unit). Only applicable for
+stmatch.}
+}
+\value{
+A list
 }
 \description{
 Set map matching parameters

@@ -5,6 +5,7 @@
 \title{Set GPS parameters}
 \usage{
 set_gps_params(
+  config,
   file,
   id = "id",
   geom = "geom",
@@ -15,17 +16,21 @@ set_gps_params(
 )
 }
 \arguments{
+\item{config}{A configuration object.}
+
 \item{file}{GPS file name.}
 
 \item{id}{GPS id column name.}
 
-\item{geom}{GPS geometry column name. Only applicable to GPS trajectory CSV file.}
+\item{geom}{GPS geometry column name. Only applies to GPS trajectory
+CSV file.}
 
-\item{gps_point}{If specified read input data as GPS point, otherwise read input data as trajectory.}
+\item{gps_point}{If specified read input data as GPS point, otherwise read
+input data as trajectory.}
 
-\item{x}{GPS x column name. Only applicable to GPS point CSV file.}
+\item{x}{GPS x column name. Only applies to GPS point CSV file.}
 
-\item{y}{GPS y column name. Only applicable to GPS point CSV file.}
+\item{y}{GPS y column name. Only applies to GPS point CSV file.}
 
 \item{timestamp}{GPS timestamp column name.}
 }

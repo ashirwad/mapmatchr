@@ -5,6 +5,7 @@
 \title{Set network parameters}
 \usage{
 set_network_params(
+  config,
   file,
   id = "id",
   source = "source",
@@ -13,6 +14,8 @@ set_network_params(
 )
 }
 \arguments{
+\item{config}{A configuration object.}
+
 \item{file}{Network file name.}
 
 \item{id}{Network id column name.}
@@ -21,7 +24,8 @@ set_network_params(
 
 \item{target}{Network target column name.}
 
-\item{mode}{Network mode name. Only applicable to OpenStreetMap (OSM) network.}
+\item{mode}{Network mode name. Only applies to OpenStreetMap (OSM) network.
+Allowed values are one of drive|walk|bike|all.}
 }
 \value{
 A list.
