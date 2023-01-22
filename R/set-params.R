@@ -94,25 +94,43 @@ set_gps_params <- function(config,
 
 #' Set map matching parameters
 #'
+#' @param config A configuration object.
 #' @param candidates Number of candidates.
-#' @param radius Search radius.
-#' @param error GPS sensor error.
-#' @param factor Scale factor to limit shortest path search. Only applicable for stmatch.
-#' @param vmax Maximum vehicle speed. Only applicable for stmatch.
+#' @param radius Search radius (unit: map unit).
+#' @param error GPS sensor error (unit: map unit).
+#' @param factor Scale factor to limit shortest path search. Only applicable for
+#' stmatch.
+#' @param vmax Maximum vehicle speed (unit: map unit). Only applicable for
+#' stmatch.
 #'
-#' @return
+#' @return A list
 #' @export
 #'
 #' @examples
-set_map_match_params <- function(candidates = 8,
+set_map_match_params <- function(config,
+                                 candidates = 8L,
                                  radius = 300,
                                  error = 50,
                                  factor = 1.5,
                                  vmax = 30) {
-  # Error handling
-  checkmate::assert_int(candidates)
-  checkmate::assert_number(radius)
-  checkmate::assert_number(error)
-  checkmate::assert_number(factor)
-  checkmate::assert_number(vmax)
+  # defenses
+  checkmate::assert_list(config)
+  checkmate::assert_count(candidates, positive = TRUE)
+  checkmate::assert_number(radius, lower = 0)
+  checkmate::assert_number(error, lower = 0)
+  checkmate::assert_number(factor, lower = 0)
+  checkmate::assert_number(vmax, lower = 0)
+
+  # update config object
+  config <- config |>
+    purrr::assign_in(
+      list(1, "parameters"),
+      list(
+        candidates = candidates, radius = radius, error = error,
+        factor = factor, vmax = vmax
+      )
+    )
+
+  # return the updated config object
+  config
 }
