@@ -1,5 +1,6 @@
 #' Set network parameters
 #'
+#' @param config A configuration object.
 #' @param file Network file name.
 #' @param id Network id column name.
 #' @param source Network source column name.
@@ -39,33 +40,55 @@ set_network_params <- function(config,
 
 #' Set GPS parameters
 #'
+#' @param config A configuration object.
 #' @param file GPS file name.
 #' @param id GPS id column name.
-#' @param geom GPS geometry column name. Only applicable to GPS trajectory CSV file.
-#' @param gps_point If specified read input data as GPS point, otherwise read input data as trajectory.
-#' @param x GPS x column name. Only applicable to GPS point CSV file.
-#' @param y GPS y column name. Only applicable to GPS point CSV file.
+#' @param geom GPS geometry column name. Only applies to GPS trajectory
+#' CSV file.
+#' @param gps_point If specified read input data as GPS point, otherwise read
+#' input data as trajectory.
+#' @param x GPS x column name. Only applies to GPS point CSV file.
+#' @param y GPS y column name. Only applies to GPS point CSV file.
 #' @param timestamp GPS timestamp column name.
 #'
 #' @return A list.
 #' @export
 #'
 #' @examples
-set_gps_params <- function(file,
+set_gps_params <- function(config,
+                           file,
                            id = "id",
                            geom = "geom",
                            gps_point = FALSE,
                            x = "x",
                            y = "y",
                            timestamp = "timestamp") {
-  # Error handling
-  checkmate::assert_string(file)
+  # defenses
+  checkmate::assert_list(config)
+  checkmate::assert_file_exists(file, extension = "csv")
   checkmate::assert_string(id)
   checkmate::assert_string(geom)
   checkmate::assert_flag(gps_point)
   checkmate::assert_string(x)
   checkmate::assert_string(y)
   checkmate::assert_string(timestamp)
+
+  # update config object
+  config  <- config |>
+    purrr::assign_in(
+      list(1, "input", "gps"),
+      list(
+        file = file, id = id, geom = geom, x = x, y = y, timestamp = timestamp
+      )
+    )
+
+  if (gps_point) {
+    config <- config |>
+      purrr::assign_in(list(1, "input", "gps", "gps_point"), NULL)
+  }
+
+  # return the updated config object
+  config
 }
 
 
